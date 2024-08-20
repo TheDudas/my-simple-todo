@@ -3,22 +3,32 @@
     {
       "id": "1",
       "text": "Buy groceries",
-      "completed": false
+      "completed": true
     },
     {
       "id": "b2f0",
       "text": "Clean room",
-      "completed": false
+      "completed": true
     },
     {
       "id": "e6f0",
       "text": "Do homework",
-      "completed": false
+      "completed": true
     },
     {
       "id": "3d3c",
       "text": "Clean kitchen",
       "completed": true
+    },
+    {
+      "id": "6f65",
+      "text": "New Todo",
+      "completed": false
+    },
+    {
+      "id": "bfc5",
+      "text": "test",
+      "completed": false
     }
   ]
 }

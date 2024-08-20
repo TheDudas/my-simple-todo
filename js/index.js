@@ -89,32 +89,16 @@ $(document).ready(function () {
   render();
 
   //add event listener to the add todo button
-  $("#addTodo").click(async () => {
-    //get the value of the input field
-    const text = $("#newTodo").val();
-    console.log({ text });
-
-    //add the todo to the server
-    try {
-      await addTodo(text);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      //clear the input field regardless of the outcome
-      $("#newTodo").val("");
-    }
-
-    //re-render the todos by calling the render function
-    render();
-  });
-
-  //add event listener to the add todo form submit event when the user presses enter
-  $("form").submit(async (event) => {
-    //prevent the default form submission behavior; no page reload
+  $("#addTodo").click(async (event) => {
     event.preventDefault();
     //get the value of the input field
     const text = $("#newTodo").val();
     // console.log({ text });
+
+    if (!text) {
+      alert("Please enter a todo");
+      return;
+    }
 
     //add the todo to the server
     try {
