@@ -5,7 +5,7 @@ $(document).ready(function () {
 
   /**API Request Functions */
 
-  //create a function to get all todos from the server
+  //get all todos from DB
   const fetchTodos = async () => {
     //fetch data from the server using the fetch API
     const response = await fetch(`${BASE_URL}/todos`);
@@ -18,7 +18,7 @@ $(document).ready(function () {
     return data;
   };
 
-  //create a function to add a new todo to the server
+  //get a todo by its ID
   const fetchTodo = async (id) => {
     //fetch data from the server using the fetch API
     const response = await fetch(`${BASE_URL}/todos/${id}`);
@@ -31,7 +31,7 @@ $(document).ready(function () {
     return data;
   };
 
-  //create a function to add a new todo to the server
+  //add a new todo to the server
   const addTodo = async (text) => {
     //fetch data from the server using the fetch API
     const response = await fetch(`${BASE_URL}/todos`, {
@@ -88,11 +88,33 @@ $(document).ready(function () {
   // Call the render function when the page loads
   render();
 
-  //add event listener to the add todo form
+  //add event listener to the add todo button
   $("#addTodo").click(async () => {
     //get the value of the input field
     const text = $("#newTodo").val();
     console.log({ text });
+
+    //add the todo to the server
+    try {
+      await addTodo(text);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      //clear the input field regardless of the outcome
+      $("#newTodo").val("");
+    }
+
+    //re-render the todos by calling the render function
+    render();
+  });
+
+  //add event listener to the add todo form submit event when the user presses enter
+  $("form").submit(async (event) => {
+    //prevent the default form submission behavior; no page reload
+    event.preventDefault();
+    //get the value of the input field
+    const text = $("#newTodo").val();
+    // console.log({ text });
 
     //add the todo to the server
     try {
@@ -133,7 +155,7 @@ $(document).ready(function () {
     const todo = await fetchTodo(id);
     // console.log("editing", { id, todo });
 
-    const res = await fetch(`${BASE_URL}/todos/${id}`, {
+    await fetch(`${BASE_URL}/todos/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -142,8 +164,31 @@ $(document).ready(function () {
       body: JSON.stringify({ ...todo, completed: !todo.completed }),
     });
 
-    // const updatedTodo = await res.json();
-    // console.log({ updatedTodo });
+    // Re-render the todos by calling the render function
+    render();
+  });
+
+  //add event listener to the editTodo button
+  //Need to use event delegation since the editTodo button is dynamically created
+  $(document).on("click", ".editTodo", async function () {
+    // Get the id of the todo to be deleted
+    const id = $(this).data("index");
+    // fetch the todo from the server
+    const todo = await fetchTodo(id);
+    let todoTextElement = $(this).closest("li").find(".todo-text");
+    const newText = prompt("Edit your to-do:", todo.text);
+
+    console.log("editing", { id, todoTextElement, newText });
+
+    await fetch(`${BASE_URL}/todos/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // toggle the todo status to bo the opposite of what it currently is
+      body: JSON.stringify({ ...todo, text: newText }),
+    });
+
     // Re-render the todos by calling the render function
     render();
   });
