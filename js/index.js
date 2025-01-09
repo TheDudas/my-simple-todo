@@ -164,6 +164,10 @@ $(document).ready(function () {
 
     console.log("editing", { id, todoTextElement, newText });
 
+    if (!newText) {
+      return;
+    }
+
     await fetch(`${BASE_URL}/todos/${id}`, {
       method: "PUT",
       headers: {

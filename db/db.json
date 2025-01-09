@@ -2,8 +2,8 @@
   "todos": [
     {
       "id": "1",
-      "text": "Buy groceries",
-      "completed": true
+      "text": "Walk",
+      "completed": false
     },
     {
       "id": "b2f0",
@@ -17,16 +17,11 @@
     },
     {
       "id": "3d3c",
-      "text": "Clean kitchen",
-      "completed": true
-    },
-    {
-      "id": "6f65",
-      "text": "New Todo",
+      "text": "Walk the dog",
       "completed": false
     },
     {
-      "id": "bfc5",
+      "id": "6f65",
       "text": "test",
       "completed": false
     }
