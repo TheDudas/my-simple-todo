@@ -1,7 +1,7 @@
 // alert("connected");
 $(document).ready(function () {
   //create Base URL variable
-  const BASE_URL = "http://localhost:3000";
+  const BASE_URL = "http://localhost:4000";
 
   /**API Request Functions */
 
