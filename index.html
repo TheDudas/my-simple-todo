@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To-Do List</title>
+    <title>Task List</title>
     <!-- Bootstrap CSS -->
     <link
       rel="stylesheet"
@@ -14,37 +14,56 @@
   </head>
   <body>
     <div class="container mt-5">
-      <h1 class="text-center">To-Do List</h1>
+      <h1 class="text-center">Task List</h1>
       <div class="input-group mb-3">
-        <form id="todoForm">
+        <form id="taskForm">
           <input
             type="text"
-            id="newTodo"
+            id="newTask"
             class="form-control"
-            placeholder="Add a new to-do"
+            placeholder="Add a new task"
             required
           />
-          <button class="btn btn-primary" id="addTodo" type="submit">
+          <button class="btn btn-primary" id="addTask" type="submit">
             Add
           </button>
         </form>
       </div>
-      <ul class="list-group" id="todoList">
+      <ul class="list-group" id="taskList">
         <!-- To-Do items will be appended here -->
-         
-         <li
+
+          <li
           class="list-group-item d-flex justify-content-between align-items-center"
         >
-          <span class="todo-text completed">completed</span>
+          <span class="task-text completed">completed</span>
           <div>
-            <button class="btn btn-sm btn-secondary editTodo" data-index="1">
+            <button class="btn btn-sm btn-secondary editTask" data-index="1">
               Edit
             </button>
-            <button class="btn btn-sm btn-success toggleTodo" data-index="1">
+            <button class="btn btn-sm btn-success toggleTask" data-index="1">
               Complete
             </button>
             <button
-              class="btn btn-sm btn-danger deleteTodo"
+              class="btn btn-sm btn-danger deleteTask"
+              data-index="${index}"
+            >
+              Delete
+            </button>
+          </div>
+        </li>
+        <li 
+           class="list-group-item d-flex justify-content-between align-items-center"
+        >
+          <span class="task-text completed">Walk the dog</span>
+          <div>
+            <button class="btn btn-sm btn-secondary editTask" data-index="1">
+              Edit
+            </button>
+            <button class="btn btn-sm btn-success toggleTask" data-index="1">
+              Complete
+            </button>
+            <button
+              class="btn btn-sm btn-danger deleteTask"
               data-index="${index}"
             >
               Delete
@@ -54,47 +73,29 @@
         <li
           class="list-group-item d-flex justify-content-between align-items-center"
         >
-          <span class="todo-text completed">Walk the dog</span>
+          <span class="task-text">Clean my room</span>
           <div>
-            <button class="btn btn-sm btn-secondary editTodo" data-index="1">
+            <button class="btn btn-sm btn-secondary editTask" data-index="1">
               Edit
             </button>
-            <button class="btn btn-sm btn-success toggleTodo" data-index="1">
-              Complete
-            </button>
-            <button
-              class="btn btn-sm btn-danger deleteTodo"
-              data-index="${index}"
-            >
-              Delete
-            </button>
-          </div>
-        </li>
-        <li
-          class="list-group-item d-flex justify-content-between align-items-center"
-        >
-          <span class="todo-text">Clean my room</span>
-          <div>
-            <button class="btn btn-sm btn-secondary editTodo" data-index="1">
-              Edit
-            </button>
-            <button class="btn btn-sm btn-success toggleTodo" data-index="1">
+            <button class="btn btn-sm btn-success toggleTask" data-index="1">
               Incomplete
             </button>
             <button
-              class="btn btn-sm btn-danger deleteTodo"
+              class="btn btn-sm btn-danger deleteTask"
               data-index="${index}"
             >
               Delete
             </button>
           </div>
-        </li>
+        </li> 
       </ul>
     </div>
 
     <!-- jQuery and Bootstrap JS -->
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    
     <!-- Custom JavaScript -->
     <script src="js/index.js"></script>
   </body>

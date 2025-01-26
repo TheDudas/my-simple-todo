@@ -1,28 +1,18 @@
 {
-  "todos": [
+  "tasks": [
     {
-      "id": "1",
-      "text": "Walk",
+      "id": "ce35",
+      "text": "Get Taxes",
       "completed": false
     },
     {
-      "id": "b2f0",
-      "text": "Clean room",
-      "completed": true
-    },
-    {
-      "id": "e6f0",
-      "text": "Do homework",
-      "completed": true
-    },
-    {
-      "id": "3d3c",
-      "text": "Walk the dog",
+      "id": "c06c",
+      "text": "Complete Homework",
       "completed": false
     },
     {
-      "id": "6f65",
-      "text": "cool",
+      "id": "c29d",
+      "text": "Burn the trash",
       "completed": false
     }
   ]
