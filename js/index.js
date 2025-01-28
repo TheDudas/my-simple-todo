@@ -31,7 +31,7 @@ $(document).ready(function () {
     return data;
   };
 
-  //add a new todo to the server
+  //add a new task to the server
   const addTask = async (text) => {
     //fetch data from the server using the fetch API
     const response = await fetch(`${BASE_URL}/tasks`, {
@@ -54,14 +54,14 @@ $(document).ready(function () {
 
   //create render function to retrieve data from the server and render it to the page
   const render = async () => {
-    //fetch all todos from the server
+    //fetch all tasks from the server
     const tasks = await fetchTasks();
-    // console.log("todos from render", { todos });
+    // console.log("tasks from render", { tasks });
 
     // Clear the current list
     $("#taskList").empty();
 
-    // Loop through the todos array and append each todo to the list
+    // Loop through the task array and append each task to the list. Adds to INdex.HTML file and db.json
     tasks.forEach(function (task, index) {
       let taskItem = `<li class="list-group-item d-flex justify-content-between align-items-center">
                                   <span class="task-text ${
@@ -88,7 +88,7 @@ $(document).ready(function () {
   // Call the render function when the page loads
   render();
 
-  //add event listener to the add todo button
+  //add event listener to the add task button
   $("#addTask").click(async (event) => {
     event.preventDefault();
     //get the value of the input field
@@ -100,7 +100,7 @@ $(document).ready(function () {
       return;
     }
 
-    //add the todo to the server
+    //add the task to the server
     try {
       await addTask(text);
     } catch (error) {
@@ -110,7 +110,7 @@ $(document).ready(function () {
       $("#newTask").val("");
     }
 
-    //re-render the todos by calling the render function
+    //re-render the tasks by calling the render function
     render();
   });
 
@@ -131,8 +131,8 @@ $(document).ready(function () {
     render();
   });
 
-  //add event listener to the toggleTodo button
-  //Need to use event delegation since the toggleTodo button is dynamically created
+  //add event listener to the toggleTask button
+  //Need to use event delegation since the toggleTask button is dynamically created
   $(document).on("click", ".toggleTask", async function () {
     // Get the id of the task to be deleted
     const id = $(this).data("index");
@@ -153,32 +153,32 @@ $(document).ready(function () {
     render();
   });
 
-  //add event listener to the editTodo button
-  //Need to use event delegation since the editTodo button is dynamically created
-  $(document).on("click", ".editTask", async function () {
-    // Get the id of the todo to be deleted
-    const id = $(this).data("index");
-    // fetch the todo from the server
-    const task = await fetchTask(id);
-    let taskTextElement = $(this).closest("li").find(".task-text");
-    const newText = prompt("Edit your Task:", task.text);
+  //add event listener to the editTask button
+  //Need to use event delegation since the editTask button is dynamically created
+  // $(document).on("click", ".editTask", async function () {
+  //   // Get the id of the task to be deleted
+  //   const id = $(this).data("index");
+  //   // fetch the task from the server
+  //   const task = await fetchTask(id);
+  //   let taskTextElement = $(this).closest("li").find(".task-text");
+  //   const newText = prompt("Edit your Task:", task.text);
 
-    console.log("editing", { id, taskTextElement, newText });
+  //   console.log("editing", { id, taskTextElement, newText });
 
-    if (!newText) {
-      return;
-    }
+  //   if (!newText) {
+  //     return;
+  //   }
 
-    await fetch(`${BASE_URL}/tasks/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // toggle the todo status to bo the opposite of what it currently is
-      body: JSON.stringify({ ...task, text: newText }),
-    });
+  //   await fetch(`${BASE_URL}/tasks/${id}`, {
+  //     method: "PUT",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     // toggle the task status to bo the opposite of what it currently is
+  //     body: JSON.stringify({ ...task, text: newText }),
+  //   });
 
-    // Re-render the todos by calling the render function
-    render();
-  });
+  //   // Re-render the tasks by calling the render function
+  //   render();
+  // });
 });
